@@ -3,17 +3,19 @@ package music
 // Start is used to start all the Devices and generally
 // just start the Music-Session
 func (session *session) Start() error {
-	err := session.MicCaptureDevice.Start()
-	if err != nil {
-		return err
+	if session.Playmic {
+		err := session.MicCaptureDevice.Start()
+		if err != nil {
+			return err
+		}
+
+		err = session.MicPlaybackDevice.Start()
+		if err != nil {
+			return err
+		}
 	}
 
-	err = session.MicPlaybackDevice.Start()
-	if err != nil {
-		return err
-	}
-
-	err = session.DefaultPlaybackDevice.Start()
+	err := session.DefaultPlaybackDevice.Start()
 	if err != nil {
 		return err
 	}

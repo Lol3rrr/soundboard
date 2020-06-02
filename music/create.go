@@ -10,7 +10,7 @@ import (
 )
 
 // CreateSession is used to obtain a new Music-Session
-func CreateSession(captureDevice, playbackDevice string) (Session, error) {
+func CreateSession(captureDevice, playbackDevice string, playMic bool) (Session, error) {
 	result := &session{}
 
 	ctx, err := malgo.InitContext(nil, malgo.ContextConfig{
@@ -59,6 +59,7 @@ func CreateSession(captureDevice, playbackDevice string) (Session, error) {
 	result.MusicBuffer = musicBuffer
 	result.DefaultBuffer = defaultBuffer
 	result.Volume = 100
+	result.Playmic = playMic
 
 	return result, nil
 }

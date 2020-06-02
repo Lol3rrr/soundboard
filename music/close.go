@@ -5,8 +5,11 @@ func (session *session) Close() {
 	_ = session.Context.Uninit()
 	session.Context.Free()
 
-	session.MicCaptureDevice.Uninit()
-	session.MicPlaybackDevice.Uninit()
+	if session.Playmic {
+		session.MicCaptureDevice.Uninit()
+		session.MicPlaybackDevice.Uninit()
+	}
+
 	session.DefaultPlaybackDevice.Uninit()
 	session.MusicPlaybackDevice.Uninit()
 }

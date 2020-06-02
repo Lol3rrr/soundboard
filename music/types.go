@@ -18,7 +18,8 @@ type session struct {
 	MusicBuffer   *bytes.Buffer
 	DefaultBuffer *bytes.Buffer
 
-	Volume float64
+	Volume  float64
+	Playmic bool
 }
 
 // Session is the current Session used
@@ -35,4 +36,6 @@ type Session interface {
 
 	FindCaptureDevice(name string)
 	FindPlaybackDevice(name string)
+
+	SwitchPlayMic(nPlaymic bool)
 }

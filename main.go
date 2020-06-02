@@ -53,7 +53,7 @@ func main() {
 		userSettings.Save(settingsPath)
 	}
 
-	mSession, err := music.CreateSession("", "")
+	mSession, err := music.CreateSession("", "", userSettings.PlayMic)
 	if err != nil {
 		logrus.Errorf("Could not initialize Music-Session: %s \n", err)
 		return
@@ -83,6 +83,10 @@ func main() {
 		widget.NewLabel("Capture Device:"),
 		widget.NewSelect(captureDevices, func(nValue string) {
 			mSession.FindCaptureDevice(nValue)
+		}),
+		widget.NewCheck("Play Mic", func(nValue bool) {
+			mSession.SwitchPlayMic(nValue)
+			userSettings.SwitchPlaymic(nValue)
 		}),
 	)
 	deviceBar.Append(captureBox)
