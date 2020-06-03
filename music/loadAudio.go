@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/hajimehoshi/go-mp3"
-	"github.com/youpy/go-wav"
 )
 
 // LoadAudio is used to get a reader for an audio stream
@@ -20,8 +19,6 @@ func LoadAudio(path string) (io.Reader, error) {
 	}
 
 	switch strings.ToLower(filepath.Ext(path)) {
-	case ".wav":
-		return wav.NewReader(file), nil
 	case ".mp3":
 		return mp3.NewDecoder(file)
 	default:
