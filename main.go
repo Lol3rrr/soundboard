@@ -99,6 +99,12 @@ func main() {
 	deviceBar.Append(playbackBox)
 	content.Append(deviceBar)
 
+	volumeSlider := widget.NewSlider(0, 100)
+	volumeSlider.OnChanged = func(rawValue float64) {
+		mSession.SetVolume(rawValue)
+	}
+	content.Append(volumeSlider)
+
 	pathPlayBox := widget.NewHBox()
 	pathEntry := widget.NewEntry()
 	pathEntry.SetPlaceHolder("Audio Path")

@@ -18,7 +18,7 @@ type session struct {
 	MusicBuffer   *bytes.Buffer
 	DefaultBuffer *bytes.Buffer
 
-	Volume  float64
+	Volume  int16 // 1 is full volume; 100 is really silent
 	Playmic bool
 }
 
