@@ -1,6 +1,9 @@
 package music
 
-import "soundboard/devices"
+import (
+	"bytes"
+	"soundboard/devices"
+)
 
 func (session *session) FindPlaybackDevice(name string) {
 	session.MicPlaybackDevice.Stop()
@@ -19,6 +22,8 @@ func (session *session) FindPlaybackDevice(name string) {
 
 	session.MicPlaybackDevice = nMicPlayback
 	session.MusicPlaybackDevice = nMusicPlayback
+
+	session.MicBuffer = bytes.NewBuffer([]byte{})
 
 	session.MicPlaybackDevice.Start()
 	session.MusicPlaybackDevice.Start()
