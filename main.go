@@ -79,15 +79,17 @@ func main() {
 	content := widget.NewVBox()
 
 	deviceBar := widget.NewVBox()
+	playMicCheckbox := widget.NewCheck("Play Mic", func(nValue bool) {
+		mSession.SwitchPlayMic(nValue)
+		userSettings.SwitchPlaymic(nValue)
+	})
+	playMicCheckbox.SetChecked(userSettings.PlayMic)
 	captureBox := widget.NewHBox(
 		widget.NewLabel("Capture Device:"),
 		widget.NewSelect(captureDevices, func(nValue string) {
 			mSession.FindCaptureDevice(nValue)
 		}),
-		widget.NewCheck("Play Mic", func(nValue bool) {
-			mSession.SwitchPlayMic(nValue)
-			userSettings.SwitchPlaymic(nValue)
-		}),
+		playMicCheckbox,
 	)
 	deviceBar.Append(captureBox)
 	playbackBox := widget.NewHBox(

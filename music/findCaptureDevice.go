@@ -1,10 +1,14 @@
 package music
 
-import "soundboard/devices"
+import (
+	"soundboard/devices"
+)
 
 func (session *session) FindCaptureDevice(name string) {
-	session.MicCaptureDevice.Stop()
-	session.MicCaptureDevice.Uninit()
+	if session.Playmic {
+		session.MicCaptureDevice.Stop()
+		session.MicCaptureDevice.Uninit()
+	}
 
 	nMicDevice, err := devices.GetMic(session.Context, name, session.onMicRecv)
 	if err != nil {
@@ -13,5 +17,7 @@ func (session *session) FindCaptureDevice(name string) {
 
 	session.MicCaptureDevice = nMicDevice
 
-	session.MicCaptureDevice.Start()
+	if session.Playmic {
+		session.MicCaptureDevice.Start()
+	}
 }

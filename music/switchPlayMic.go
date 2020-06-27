@@ -3,10 +3,7 @@ package music
 func (s *session) SwitchPlayMic(nPlaymic bool) {
 	if s.Playmic {
 		s.MicCaptureDevice.Stop()
-		s.MicCaptureDevice.Uninit()
-
 		s.MicPlaybackDevice.Stop()
-		s.MicPlaybackDevice.Uninit()
 	}
 
 	s.Playmic = nPlaymic
